@@ -73,7 +73,7 @@ void convert(unsigned char y, unsigned char u, unsigned char v, unsigned char &r
 int main(int argc, char* argv[])
 {
 	Mat			outputMat;
-	format_yuv_type fmt = FM_420_PLANER_UV;
+	format_yuv_type fmt = FM_420_SEMI_PLANER_UV;
 	char deli[] = "_.";
 	char *context = NULL;
 	char* filename = argv[1];
@@ -84,6 +84,8 @@ int main(int argc, char* argv[])
 	int height = atoi(strtok_s(NULL, deli, &context));
 	int pitch = atoi(strtok_s(NULL, deli, &context));
 
+	if (!pitch)
+		pitch = width;
 	int length = pitch * height;
 
 	std::ifstream is(filename, std::ifstream::binary);
